@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% block title %}Тренировка{% endblock %}
+
+{% block content %}
+<div class="text-center mb-4">
+    <h1>🧠 Режим тренировки</h1>
+    <p class="lead">Карточка {{ card_number }} из {{ total_cards }}</p>
+    
+    {% if streak > 0 %}
+    <div class="alert alert-success d-inline-block">
+        🔥 Текущая серия: {{ streak }} правильных ответов подряд!
+    </div>
+    {% endif %}
+</div>
+
+<div class="flip-card" id="flipCard" onclick="flipCard()">
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+            <h3>❓ Вопрос:</h3>
+            <p class="question-text">{{ card.question }}</p>
+            <small class="text-muted mt-3">👇 Нажми на карточку, чтобы увидеть ответ</small>
+        </div>
+        <div class="flip-card-back">
+            <h3>✅ Ответ:</h3>
+            <p class="answer-text">{{ card.answer }}</p>
+        </div>
+    </div>
+</div>
+
+<div class="text-center mt-4">
+    <form method="post" action="{% url 'check-answer' card.id %}" id="answerForm" style="display: none;">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="user_answer" class="form-label">Введи свой ответ:</label>
+            <input type="text" class="form-control w-50 mx-auto" id="user_answer" name="user_answer" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Проверить</button>
+    </form>
+</div>
+
+<div class="text-center mt-4">
+    <a href="{% url 'reset-study' %}" class="btn btn-outline-danger">🔄 Начать заново</a>
+</div>
+
+<style>
+.flip-card {
+    background-color: transparent;
+    width: 100%;
+    max-width: 600px;
+    height: 350px;
+    perspective: 1000px;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    border-radius: 15px;
+}
+
+.flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.flip-card-front {
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+    color: white;
+}
+
+.flip-card-back {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    color: white;
+    transform: rotateY(180deg);
+}
+
+.question-text, .answer-text {
+    font-size: 1.3rem;
+    margin-top: 20px;
+    line-height: 1.5;
+}
+</style>
+
+<script>
+let isFlipped = false;
+
+function flipCard() {
+    const card = document.getElementById('flipCard');
+    card.classList.toggle('flipped');
+    
+    if (!isFlipped) {
+        // После переворота показываем форму для ввода ответа
+        setTimeout(() => {
+            document.getElementById('answerForm').style.display = 'block';
+        }, 300);
+        isFlipped = true;
+    }
+}
+</script>
+{% endblock %}

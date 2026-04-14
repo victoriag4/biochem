@@ -1,3 +1,7 @@
-from django.test import TestCase
+"""Тесты для приложения cards (пока не реализованы)."""
 
-# Create your tests here.
+# from django.test import TestCase
+
+# class SimpleTest(TestCase):
+#     def test_dummy(self):
+#         self.assertTrue(True)

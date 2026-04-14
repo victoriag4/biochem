@@ -2,15 +2,23 @@
 {% block title %}Все карточки{% endblock %}
 
 {% block content %}
-<h1 class="mb-4">📚 Все карточки по биохимии</h1>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>📚 Все карточки по биохимии</h1>
+    <a href="{% url 'card-add' %}" class="btn btn-success">➕ Добавить карточку</a>
+</div>
 
 {% if cards %}
     <div class="row">
         {% for card in cards %}
         <div class="col-md-6 mb-4">
             <div class="card h-100">
-                <div class="card-header">
+                <div class="card-header d-flex justify-content-between align-items-center">
                     <span class="badge bg-secondary">{{ card.get_category_display }}</span>
+                    <div>
+                        <a href="{% url 'card-edit' card.id %}" class="btn btn-sm btn-outline-primary me-1">✏️</a>
+                        <button type="button" class="btn btn-sm btn-outline-danger"
+                                data-bs-toggle="modal" data-bs-target="#deleteModal{{ card.id }}">🗑️</button>
+                    </div>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">❓ {{ card.question }}</h5>
@@ -23,11 +31,34 @@
                 </div>
             </div>
         </div>
+
+        <!-- Модальное окно подтверждения удаления -->
+        <div class="modal fade" id="deleteModal{{ card.id }}" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Подтверждение удаления</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        Вы уверены, что хотите удалить карточку "{{ card.question|truncatechars:50 }}"?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                        <form method="post" action="{% url 'card-delete' card.id %}" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Удалить</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         {% endfor %}
     </div>
 {% else %}
     <div class="alert alert-warning">
-        Пока нет ни одной карточки. Добавь их через админку!
+        Пока нет ни одной карточки.
+        <a href="{% url 'card-add' %}" class="alert-link">Добавь первую карточку!</a>
     </div>
 {% endif %}
 {% endblock %}

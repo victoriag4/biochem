@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block title %}Статистика{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">📊 Статистика проекта</h1>
+
+<div class="row">
+    <!-- Общая статистика по карточкам -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">📚 Карточки</h4>
+            </div>
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-6">
+                        <h2>{{ total_cards }}</h2>
+                        <p>всего карточек</p>
+                    </div>
+                    <div class="col-6">
+                        <h2>{{ total_cards|add:"-5" }}</h2>
+                        <p>добавлено пользователями</p>
+                    </div>
+                </div>
+                
+                <h5 class="mt-3">По категориям:</h5>
+                <ul class="list-group">
+                    {% for cat_name, count in categories.items %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ cat_name }}
+                        <span class="badge bg-primary rounded-pill">{{ count }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Статистика тренировок -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0">🏆 Тренировки</h4>
+            </div>
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-6">
+                        <h2>{{ total_sessions }}</h2>
+                        <p>всего тренировок</p>
+                    </div>
+                    <div class="col-6">
+                        <h2>{{ avg_accuracy|floatformat:1 }}%</h2>
+                        <p>средняя точность</p>
+                    </div>
+                </div>
+                
+                {% if best_streak > 0 %}
+                <div class="alert alert-warning text-center mt-3">
+                    🔥 Рекордная серия: <strong>{{ best_streak }}</strong> правильных ответов подряд!
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Последние тренировки -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h4 class="mb-0">📅 Последние тренировки</h4>
+            </div>
+            <div class="card-body">
+                {% if recent_stats %}
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Дата</th>
+                            <th>Карточек</th>
+                            <th>Правильных</th>
+                            <th>Точность</th>
+                            <th>Макс. серия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for stat in recent_stats %}
+                        <tr>
+                            <td>{{ stat.date|date:"d.m.Y H:i" }}</td>
+                            <td>{{ stat.cards_reviewed }}</td>
+                            <td>{{ stat.correct_answers }}</td>
+                            <td>
+                                {% widthratio stat.correct_answers stat.cards_reviewed 100 %}%
+                            </td>
+                            <td>🔥 {{ stat.max_streak }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p class="text-muted text-center">Пока нет данных. Пройди тренировку, чтобы увидеть статистику!</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center mt-4">
+    <a href="{% url 'study-mode' %}" class="btn btn-primary">🧠 Начать тренировку</a>
+    <a href="{% url 'card-list' %}" class="btn btn-outline-secondary">📚 Все карточки</a>
+</div>
+{% endblock %}

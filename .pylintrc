@@ -1,0 +1,3 @@
+[MASTER]
+# Игнорируем папку с миграциями
+ignore=migrations,venv

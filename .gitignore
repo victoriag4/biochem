@@ -1,0 +1,43 @@
+# Виртуальное окружение
+venv/
+env/
+ENV/
+
+# База данных
+db.sqlite3
+*.sqlite3
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Django
+*.log
+staticfiles/
+media/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Файлы с секретами
+.env
+*.env
+
+# Отчёты тестов
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Миграции (опционально — можно не скрывать)
+# */migrations/

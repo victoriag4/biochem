@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Все карточки{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">📚 Все карточки по биохимии</h1>
+
+{% if cards %}
+    <div class="row">
+        {% for card in cards %}
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    <span class="badge bg-secondary">{{ card.get_category_display }}</span>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">❓ {{ card.question }}</h5>
+                    <p class="card-text mt-3">
+                        <strong>Ответ:</strong> {{ card.answer }}
+                    </p>
+                </div>
+                <div class="card-footer text-muted small">
+                    Добавлено: {{ card.created_at|date:"d.m.Y" }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="alert alert-warning">
+        Пока нет ни одной карточки. Добавь их через админку!
+    </div>
+{% endif %}
+{% endblock %}

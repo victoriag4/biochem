@@ -21,7 +21,7 @@
 
 ##  Запуск проекта
 
-1. Клонируй репозиторий
+1. Клонируйте репозиторий
 
 2. Создайте виртуальное окружение
 python -m venv venv
@@ -34,7 +34,7 @@ pip install -r requirements.txt
 
 python manage.py migrate
 
-5. Создать суперпользователя (для доступа к админке)
+5. Создайте суперпользователя (для доступа к админке)
 
 python manage.py createsuperuser
 
@@ -46,36 +46,15 @@ Email: можно пропустить
 
 Password: придумайте пароль
 
-6. Запустить сервер
+6. Запустите сервер
 
 python manage.py runserver
 
 7. Открыть в браузере
 Перейдите по адресу: http://127.0.0.1:8000
 
-Структура проекта
-text
-biochem_cards/
-├── cards/                   # основное приложение
-│   ├── models.py            # модели данных
-│   ├── views.py             # логика приложения
-│   ├── urls.py              # маршруты
-│   ├── admin.py             # настройки админки
-│   ├── templates/           # HTML-шаблоны
-│   └── static/              # CSS и иконки
-├── biochem_project/         # настройки Django
-├── manage.py                # управляющий скрипт
-├── requirements.txt         # зависимости
-├── .pylintrc                # настройки Pylint
-└── README.md                # этот файл
-
-
-
-
-
-Качество кода
+**Качество кода**
 Проект проверен с помощью Pylint:
-
 
 pylint cards --exit-zero
 Результат: 9.63/10

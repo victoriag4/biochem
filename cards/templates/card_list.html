@@ -41,7 +41,8 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-                        Вы уверены, что хотите удалить карточку "{{ card.question|truncatechars:50 }}"?
+                        Вы уверены, что хотите удалить карточку:<br>
+                        <strong class="text-danger">"{{ card.question }}"</strong>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>

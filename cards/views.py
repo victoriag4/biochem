@@ -147,7 +147,7 @@ def study_mode(request):
     current_card = all_cards[current_index]
     return render(request, 'study_mode.html', {
         'card': current_card,
-        'card_number': index + 1,
+        'card_number': current_index + 1,
         'total_cards': len(all_cards),
         'streak': current_streak
     })
@@ -163,15 +163,15 @@ def check_answer(request, card_id):
 
     # Обновляем статистику в сессии
     if is_correct:
-        request.session['streak'] = request.session.get('streak', 0) + 1
+        request.session['streak_count'] = request.session.get('streak_count', 0) + 1
         request.session['correct_total'] = request.session.get('correct_total', 0) + 1
 
         # Обновляем максимальную серию
-        current_streak = request.session['streak']
+        current_streak = request.session['streak_count']
         if current_streak > request.session.get('max_streak', 0):
             request.session['max_streak'] = current_streak
     else:
-        request.session['streak'] = 0
+        request.session['streak_count'] = 0
         request.session['incorrect_total'] = request.session.get('incorrect_total', 0) + 1
 
     # Переходим к следующей карточке
@@ -182,7 +182,7 @@ def check_answer(request, card_id):
         'is_correct': is_correct,
         'correct_answer': card.answer,
         'user_answer': request.POST.get('user_answer', ''),
-        'streak': request.session.get('streak', 0)
+        'streak_count': request.session.get('streak_count', 0)
     })
 
 def reset_study(request):

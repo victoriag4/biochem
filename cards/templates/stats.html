@@ -2,14 +2,14 @@
 {% block title %}Статистика{% endblock %}
 
 {% block content %}
-<h1 class="mb-4">📊 Статистика проекта</h1>
+<h1 class="mb-4"> Статистика проекта</h1>
 
 <div class="row">
     <!-- Общая статистика по карточкам -->
     <div class="col-md-6 mb-4">
         <div class="card">
             <div class="card-header bg-primary text-white">
-                <h4 class="mb-0">📚 Карточки</h4>
+                <h4 class="mb-0"> Карточки</h4>
             </div>
             <div class="card-body">
                 <div class="row text-center">
@@ -40,7 +40,7 @@
     <div class="col-md-6 mb-4">
         <div class="card">
             <div class="card-header bg-success text-white">
-                <h4 class="mb-0">🏆 Тренировки</h4>
+                <h4 class="mb-0"> Тренировки</h4>
             </div>
             <div class="card-body">
                 <div class="row text-center">
@@ -56,7 +56,7 @@
                 
                 {% if best_streak > 0 %}
                 <div class="alert alert-warning text-center mt-3">
-                    🔥 Рекордная серия: <strong>{{ best_streak }}</strong> правильных ответов подряд!
+                     Рекордная серия: <strong>{{ best_streak }}</strong> правильных ответов подряд!
                 </div>
                 {% endif %}
             </div>
@@ -69,7 +69,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header bg-info text-white">
-                <h4 class="mb-0">📅 Последние тренировки</h4>
+                <h4 class="mb-0"> Последние тренировки</h4>
             </div>
             <div class="card-body">
                 {% if recent_stats %}
@@ -92,7 +92,7 @@
                             <td>
                                 {% widthratio stat.correct_answers stat.cards_reviewed 100 %}%
                             </td>
-                            <td>🔥 {{ stat.max_streak }}</td>
+                            <td> {{ stat.max_streak }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -106,7 +106,7 @@
 </div>
 
 <div class="text-center mt-4">
-    <a href="{% url 'study-mode' %}" class="btn btn-primary">🧠 Начать тренировку</a>
-    <a href="{% url 'card-list' %}" class="btn btn-outline-secondary">📚 Все карточки</a>
+    <a href="{% url 'study-mode' %}" class="btn btn-primary"> Начать тренировку</a>
+    <a href="{% url 'card-list' %}" class="btn btn-outline-secondary"> Все карточки</a>
 </div>
 {% endblock %}

@@ -4,7 +4,7 @@
 {% block content %}
 <div class="text-center py-5">
     <div class="mb-4">
-        <span style="font-size: 4rem;">🏆</span>
+        <span style="font-size: 4rem;"></span>
     </div>
     <h1 class="display-4">Поздравляю!</h1>
     <p class="lead">Ты прошла все {{ total }} карточек!</p>
@@ -30,13 +30,13 @@
     
     {% if streak > 0 %}
     <div class="alert alert-success mt-4 d-inline-block">
-        🔥 Твоя максимальная серия в этой тренировке: {{ streak }} правильных ответов!
+         Твоя максимальная серия в этой тренировке: {{ streak }} правильных ответов!
     </div>
     {% endif %}
     
     <div class="mt-5">
-        <a href="{% url 'study-mode' %}" class="btn btn-primary btn-lg">🔄 Пройти ещё раз</a>
-        <a href="{% url 'card-list' %}" class="btn btn-outline-secondary btn-lg">📚 Вернуться к карточкам</a>
+        <a href="{% url 'study-mode' %}" class="btn btn-primary btn-lg"> Пройти ещё раз</a>
+        <a href="{% url 'card-list' %}" class="btn btn-outline-secondary btn-lg"> Вернуться к карточкам</a>
     </div>
 </div>
 {% endblock %}

@@ -5,18 +5,18 @@
 <div class="text-center py-5">
     {% if is_correct %}
     <div class="mb-4">
-        <span style="font-size: 4rem;">✅</span>
+        <span style="font-size: 4rem;"></span>
     </div>
     <div class="alert alert-success d-inline-block">
-        <h3>Правильно! 🎉</h3>
+        <h3>Правильно! </h3>
         <p>Твой ответ: "{{ user_answer }}"</p>
     </div>
     {% else %}
     <div class="mb-4">
-        <span style="font-size: 4rem;">❌</span>
+        <span style="font-size: 4rem;"></span>
     </div>
     <div class="alert alert-danger d-inline-block">
-        <h3>Неправильно 😢</h3>
+        <h3>Неправильно </h3>
         <p>Твой ответ: "{{ user_answer }}"</p>
         <p class="mt-2"><strong>Правильный ответ:</strong> {{ correct_answer }}</p>
     </div>
@@ -24,12 +24,12 @@
     
     {% if streak > 0 %}
     <div class="alert alert-info d-inline-block mt-3">
-        🔥 Текущая серия: {{ streak }} правильных ответов подряд!
+         Текущая серия: {{ streak }} правильных ответов подряд!
     </div>
     {% endif %}
     
     <div class="mt-4">
-        <a href="{% url 'study-mode' %}" class="btn btn-primary">➡️ Следующая карточка</a>
+        <a href="{% url 'study-mode' %}" class="btn btn-primary">➡ Следующая карточка</a>
     </div>
 </div>
 {% endblock %}

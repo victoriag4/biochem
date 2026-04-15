@@ -3,12 +3,12 @@
 
 {% block content %}
 <div class="text-center mb-4">
-    <h1>🧠 Режим тренировки</h1>
+    <h1> Режим тренировки</h1>
     <p class="lead">Карточка {{ card_number }} из {{ total_cards }}</p>
     
     {% if streak > 0 %}
     <div class="alert alert-success d-inline-block">
-        🔥 Текущая серия: {{ streak }} правильных ответов подряд!
+         Текущая серия: {{ streak }} правильных ответов подряд!
     </div>
     {% endif %}
 </div>
@@ -16,12 +16,12 @@
 <div class="flip-card" id="flipCard" onclick="flipCard()">
     <div class="flip-card-inner">
         <div class="flip-card-front">
-            <h3>❓ Вопрос:</h3>
+            <h3> Вопрос:</h3>
             <p class="question-text">{{ card.question }}</p>
-            <small class="text-muted mt-3">👇 Нажми на карточку, чтобы увидеть ответ</small>
+            <small class="text-muted mt-3"> Нажми на карточку, чтобы увидеть ответ</small>
         </div>
         <div class="flip-card-back">
-            <h3>✅ Ответ:</h3>
+            <h3> Ответ:</h3>
             <p class="answer-text">{{ card.answer }}</p>
         </div>
     </div>
@@ -39,7 +39,7 @@
 </div>
 
 <div class="text-center mt-4">
-    <a href="{% url 'reset-study' %}" class="btn btn-outline-danger">🔄 Начать заново</a>
+    <a href="{% url 'reset-study' %}" class="btn btn-outline-danger"> Начать заново</a>
 </div>
 
 <style>

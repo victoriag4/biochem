@@ -1,7 +1,9 @@
+/* Дополнительные стили для Minty темы */
 
-
+/* Эффекты для карточек */
 .card {
     transition: transform 0.2s, box-shadow 0.2s;
+    border-radius: 15px;
 }
 
 .card:hover {
@@ -9,11 +11,117 @@
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
+/* Стиль для навигации */
 .navbar-brand {
     font-weight: bold;
     font-size: 1.5rem;
 }
 
+/* Карточка тренировки (переворот) */
+.flip-card {
+    background-color: transparent;
+    width: 100%;
+    max-width: 600px;
+    height: 350px;
+    perspective: 1000px;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    border-radius: 15px;
+}
+
+.flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.flip-card-front {
+    background: linear-gradient(135deg, #78c2ad, #96c0b0);
+    color: white;
+}
+
+.flip-card-back {
+    background: linear-gradient(135deg, #56cc9d, #78c2ad);
+    color: white;
+    transform: rotateY(180deg);
+}
+
+.question-text, .answer-text {
+    font-size: 1.3rem;
+    margin-top: 20px;
+    line-height: 1.5;
+}
+
+/* Футер */
 footer {
     margin-top: 50px;
+}
+
+/* Кнопки с эффектом */
+.btn {
+    border-radius: 25px;
+    padding: 8px 20px;
+    transition: all 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.02);
+}
+
+/* Плавные переходы для карточек в списке */
+.card .btn-sm {
+    border-radius: 20px;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .flip-card {
+        height: 400px;
+    }
+
+    .question-text, .answer-text {
+        font-size: 1rem;
+    }
+
+    .display-1 {
+        font-size: 2.5rem;
+    }
+}
+
+/* Бейджи категорий */
+.badge {
+    border-radius: 20px;
+    padding: 5px 12px;
+}
+
+/* Таблицы */
+.table-responsive {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+/* Модальные окна */
+.modal-content {
+    border-radius: 20px;
 }

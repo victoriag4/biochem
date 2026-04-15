@@ -3,8 +3,8 @@
 
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>📚 Все карточки по биохимии</h1>
-    <a href="{% url 'card-add' %}" class="btn btn-success">➕ Добавить карточку</a>
+    <h1> Все карточки по биохимии</h1>
+    <a href="{% url 'card-add' %}" class="btn btn-success"> Добавить карточку</a>
 </div>
 
 {% if cards %}
@@ -15,13 +15,13 @@
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <span class="badge bg-secondary">{{ card.get_category_display }}</span>
                     <div>
-                        <a href="{% url 'card-edit' card.id %}" class="btn btn-sm btn-outline-primary me-1">✏️</a>
+                        <a href="{% url 'card-edit' card.id %}" class="btn btn-sm btn-outline-primary me-1"></a>
                         <button type="button" class="btn btn-sm btn-outline-danger"
-                                data-bs-toggle="modal" data-bs-target="#deleteModal{{ card.id }}">🗑️</button>
+                                data-bs-toggle="modal" data-bs-target="#deleteModal{{ card.id }}">🗑</button>
                     </div>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">❓ {{ card.question }}</h5>
+                    <h5 class="card-title"> {{ card.question }}</h5>
                     <p class="card-text mt-3">
                         <strong>Ответ:</strong> {{ card.answer }}
                     </p>

@@ -21,7 +21,7 @@
         <div class="col-md-4">
             <div class="card bg-danger text-white">
                 <div class="card-body text-center">
-                    <h2>{{ total|add:"-"|add:correct }}</h2>
+                    <h2>{{ incorrect }}</h2>
                     <p>неправильных ответов</p>
                 </div>
             </div>
@@ -35,7 +35,7 @@
     {% endif %}
     
     <div class="mt-5">
-        <a href="{% url 'study-mode' %}" class="btn btn-primary btn-lg"> Пройти ещё раз</a>
+        <a href="{% url 'reset-study' %}" class="btn btn-primary btn-lg"> Пройти ещё раз</a>
         <a href="{% url 'card-list' %}" class="btn btn-outline-secondary btn-lg"> Вернуться к карточкам</a>
     </div>
 </div>

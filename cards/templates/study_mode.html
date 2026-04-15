@@ -13,33 +13,40 @@
     {% endif %}
 </div>
 
-<div class="flip-card" id="flipCard" onclick="flipCard()">
-    <div class="flip-card-inner">
-        <div class="flip-card-front">
-            <h3> Вопрос:</h3>
-            <p class="question-text">{{ card.question }}</p>
-            <small class="text-muted mt-3"> Нажми на карточку, чтобы увидеть ответ</small>
-        </div>
-        <div class="flip-card-back">
-            <h3> Ответ:</h3>
-            <p class="answer-text">{{ card.answer }}</p>
+<div class="row">
+    <!-- Карточка с вопросом (слева) -->
+    <div class="col-md-6">
+        <div class="flip-card" id="flipCard" onclick="flipCard()">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h3> Вопрос:</h3>
+                    <p class="question-text">{{ card.question }}</p>
+                    <small class="text-muted mt-3"> Нажми на карточку, чтобы увидеть подсказку (ответ)</small>
+                </div>
+                <div class="flip-card-back">
+                    <h3> Подсказка:</h3>
+                    <p class="answer-text">{{ card.answer }}</p>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="text-center mt-4">
-    <form method="post" action="{% url 'check-answer' card.id %}" id="answerForm" style="display: none;">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="user_answer" class="form-label">Введи свой ответ:</label>
-            <input type="text" class="form-control w-50 mx-auto" id="user_answer" name="user_answer" required>
+    <!-- Форма для ввода ответа (справа, видна сразу) -->
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <h3> Твой ответ:</h3>
+                <form method="post" action="{% url 'check-answer' card.id %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <textarea class="form-control" id="user_answer" name="user_answer" rows="4"
+                                  placeholder="Введи свой ответ здесь..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-lg"> Проверить ответ</button>
+                </form>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Проверить</button>
-    </form>
-</div>
-
-<div class="text-center mt-4">
-    <a href="{% url 'reset-study' %}" class="btn btn-outline-danger"> Начать заново</a>
+    </div>
 </div>
 
 <style>

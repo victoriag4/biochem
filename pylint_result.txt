@@ -1,0 +1,7 @@
+************* Module cards.models
+cards\models.py:28:15: E1136: Value 'self.question' is unsubscriptable (unsubscriptable-object)
+cards\models.py:39:4: R0903: Too few public methods (0/2) (too-few-public-methods)
+
+------------------------------------------------------------------
+Your code has been rated at 9.63/10 (previous run: 9.63/10, +0.00)
+

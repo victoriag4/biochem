@@ -21,6 +21,7 @@ class Card(models.Model):
         verbose_name="Категория"
     )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+    source = models.CharField(max_length=50, default='db', verbose_name="Источник")
 
     def __str__(self):
         """Это отображается в админке и при выводе объекта"""

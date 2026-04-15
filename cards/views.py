@@ -111,45 +111,62 @@ def card_delete(request, card_id):
 
 
 def study_mode(request):
-    """Режим тренировки — показываем карточки по одной"""
-    all_cards = list(Card.objects.all()) # pylint: disable=no-member
+    """Режим тренировки — показываем карточки по одной."""
+    all_cards = list(Card.objects.all())  # pylint: disable=no-member
 
+    # Если нет карточек — перенаправляем на страницу добавления
     if not all_cards:
         return redirect('card-add')
 
     # Инициализируем прогресс в сессии
     if 'current_card_index' not in request.session:
         request.session['current_card_index'] = 0
-        request.session['streak'] = 0
+        request.session['streak_count'] = 0
         request.session['correct_total'] = 0
         request.session['incorrect_total'] = 0
         request.session['max_streak'] = 0
 
     current_index = request.session.get('current_card_index', 0)
-    current_streak = request.session.get('streak', 0)
+    current_streak = request.session.get('streak_count', 0)
     max_streak = request.session.get('max_streak', 0)
+    correct_total = request.session.get('correct_total', 0)
+    incorrect_total = request.session.get('incorrect_total', 0)
 
     # Если прошли все карточки
     if current_index >= len(all_cards):
         # Сохраняем статистику в БД
-        StudyStats.objects.create( # pylint: disable=no-member
+        StudyStats.objects.create(  # pylint: disable=no-member
             cards_reviewed=len(all_cards),
             correct_answers=request.session.get('correct_total', 0),
             max_streak=request.session.get('max_streak', 0)
         )
 
+        correct_total_val = request.session.get('correct_total', 0)
+        incorrect_total_val = request.session.get('incorrect_total', 0)
+        total_answers = correct_total_val + incorrect_total_val
+
+        if total_answers > 0:
+            accuracy = round((correct_total_val / total_answers) * 100, 1)
+        else:
+            accuracy = 0
+
         return render(request, 'study_complete.html', {
             'total': len(all_cards),
-            'correct': request.session.get('correct_total', 0),
+            'correct': correct_total_val,
+            'incorrect': incorrect_total_val,
+            'accuracy': accuracy,
             'streak': max_streak
         })
 
+    # Показываем текущую карточку (если есть карточки и не все пройдены)
     current_card = all_cards[current_index]
     return render(request, 'study_mode.html', {
         'card': current_card,
         'card_number': current_index + 1,
         'total_cards': len(all_cards),
-        'streak': current_streak
+        'streak': current_streak,
+        'correct_count': correct_total,
+        'incorrect_count': incorrect_total,
     })
 
 def check_answer(request, card_id):
@@ -196,6 +213,8 @@ def stats(request):
 
     # Статистика по карточкам
     total_cards = Card.objects.count() # pylint: disable=no-member
+    # Количество карточек, добавленных пользователями
+    user_added_cards = Card.objects.filter(source='user').count()  # pylint: disable=no-member
 
     # Подсчёт по категориям
     categories = {}
@@ -229,6 +248,7 @@ def stats(request):
 
     return render(request, 'stats.html', {
         'total_cards': total_cards,
+        'user_added_cards': user_added_cards,
         'categories': categories,
         'total_sessions': total_sessions,
         'avg_accuracy': avg_accuracy,

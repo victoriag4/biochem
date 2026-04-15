@@ -15,9 +15,9 @@
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <span class="badge bg-secondary">{{ card.get_category_display }}</span>
                     <div>
-                        <a href="{% url 'card-edit' card.id %}" class="btn btn-sm btn-outline-primary me-1"></a>
+                        <a href="{% url 'card-edit' card.id %}" class="btn btn-sm btn-outline-primary me-1">Редактировать</a>
                         <button type="button" class="btn btn-sm btn-outline-danger"
-                                data-bs-toggle="modal" data-bs-target="#deleteModal{{ card.id }}">🗑</button>
+                                data-bs-toggle="modal" data-bs-target="#deleteModal{{ card.id }}">Удалить</button>
                     </div>
                 </div>
                 <div class="card-body">

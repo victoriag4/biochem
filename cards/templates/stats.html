@@ -18,7 +18,7 @@
                         <p>всего карточек</p>
                     </div>
                     <div class="col-6">
-                        <h2>{{ total_cards|add:"-5" }}</h2>
+                        <h2>{{ user_added_cards }}</h2>
                         <p>добавлено пользователями</p>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                     <tbody>
                         {% for stat in recent_stats %}
                         <tr>
-                            <td>{{ stat.date|date:"d.m.Y H:i" }}</td>
+                            <td>{{ stat.date|date:"d.m.Y" }}</td>
                             <td>{{ stat.cards_reviewed }}</td>
                             <td>{{ stat.correct_answers }}</td>
                             <td>
